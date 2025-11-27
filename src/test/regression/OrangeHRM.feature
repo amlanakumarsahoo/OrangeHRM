@@ -6,6 +6,6 @@ Feature: OrangeHRM Lead Management
     @Regression_OrangeHRM_TC001 @Regression
     Scenario: Create a new lead in OrangeHRM
         Given User logs into OrangeHRM
-        # When User is on the dashboard page
+        When User is on the dashboard page
         # And User creates a new lead
         # Then Lead should be created successfully

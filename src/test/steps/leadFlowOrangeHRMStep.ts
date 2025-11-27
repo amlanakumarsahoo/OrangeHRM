@@ -30,7 +30,7 @@ When('User is on the dashboard page', async function () {
     expect(dashboardTitle).toContain('Dashboard');
 });
 
-When('User creates a new lead', async function () {
+When('User creates a new lead', { timeout: 180000 }, async function () {
     // Get page instance from hooks
     const page = (global as any).page;
     

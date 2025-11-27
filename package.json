@@ -14,7 +14,7 @@
     "cucumber-regression-json": "cucumber-js src/test/regression/ --tags @Regression --config cucumber.config.js --format json:reports/cucumber-report.json",
     "generate-bootstrap-report": "node reports/generate-report.js",
     "test-with-bootstrap-report": "npm run cucumber-regression-json && npm run generate-bootstrap-report",
-    "test_amlana": "cucumber-js src/test/regression/ --tags @Regression_TC002 --config cucumber.config.js"
+    "test_amlana": "cucumber-js src/test/regression/ --tags @Regression_OrangeHRM_TC001 --config cucumber.config.js"
   },
   "dependencies": {
     "playwright": "^1.55.0"

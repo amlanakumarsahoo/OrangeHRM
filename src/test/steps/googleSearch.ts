@@ -32,4 +32,5 @@ Then('I should see the search results', async function () {
     
     // Take a screenshot for verification
     await googleSearchPage.takeScreenshot('test-results/google-search-results.png');
+    
 });

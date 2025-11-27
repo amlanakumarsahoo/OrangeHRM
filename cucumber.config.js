@@ -8,7 +8,8 @@ module.exports = {
     },
     publishQuiet: true,
     worldParameters: {
-      baseUrl: 'https://www.google.com'
+      //baseUrl: 'https://www.google.com'
+      baseUrl: 'https://opensource-demo.orangehrmlive.com/web/index.php/auth/login'
     }
   }
 };

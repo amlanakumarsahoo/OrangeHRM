@@ -1,5 +1,5 @@
 # Node
 node_modules/
-.vscode/
+# .vscode/ - commented out to allow settings configuration
 playwrightPractice/
 gitignore/

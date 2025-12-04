@@ -3,8 +3,8 @@ const commonConfig = {
   require: ['src/test/steps/**/*.ts', 'src/main/hooks.ts'],
   format: [
     'progress',
-    'html:playwright-report/cucumber-html-report.html',
-    'json:playwright-report/reports/cucumber-report.json'
+    'html:results/playwright-report/cucumber-html-report.html',
+    'json:results/playwright-report/cucumber-report.json'
   ],
   formatOptions: {
     snippetInterface: 'async-await'

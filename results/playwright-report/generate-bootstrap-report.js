@@ -2,21 +2,12 @@ const reporter = require('cucumber-html-reporter');
 const fs = require('fs');
 const path = require('path');
 
-// Ensure the reports directory exists
-const reportsDir = path.join(__dirname, '..', 'reports');
-if (!fs.existsSync(reportsDir)) {
-    fs.mkdirSync(reportsDir, { recursive: true });
-}
-
-// Ensure the playwright-report directory exists
-const playwrightReportDir = path.join(__dirname, '..', 'playwright-report');
-if (!fs.existsSync(playwrightReportDir)) {
-    fs.mkdirSync(playwrightReportDir, { recursive: true });
-}
+// Use the current directory (playwright-report) where cucumber generates the JSON
+const playwrightReportDir = __dirname;
 
 const options = {
     theme: 'bootstrap',
-    jsonDir: reportsDir,
+    jsonDir: playwrightReportDir,
     output: path.join(playwrightReportDir, 'cucumber-bootstrap-report.html'),
     reportSuiteAsScenarios: true,
     scenarioTimestamp: true,

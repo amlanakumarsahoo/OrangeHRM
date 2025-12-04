@@ -1,0 +1,75 @@
+[
+  {
+    "description": "    As an HR admin\n    I want to manage leads in OrangeHRM\n    So that I can track potential candidates",
+    "elements": [
+      {
+        "description": "",
+        "id": "orangehrm-lead-management;create-a-new-lead-in-orangehrm",
+        "keyword": "Scenario",
+        "line": 7,
+        "name": "Create a new lead in OrangeHRM",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 325593400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "User logs into OrangeHRM",
+            "match": {
+              "location": "src\\test\\steps\\leadFlowOrangeHRMStep.ts:12"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 11606828400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 9,
+            "name": "User is on the dashboard page",
+            "match": {
+              "location": "src\\test\\steps\\leadFlowOrangeHRMStep.ts:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 25471400
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 166218399
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression_OrangeHRM_TC001",
+            "line": 6
+          },
+          {
+            "name": "@Regression",
+            "line": 6
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "orangehrm-lead-management",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "OrangeHRM Lead Management",
+    "tags": [],
+    "uri": "src\\test\\regression\\OrangeHRM.feature"
+  }
+]

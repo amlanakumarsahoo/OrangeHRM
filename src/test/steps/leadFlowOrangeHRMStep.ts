@@ -9,13 +9,16 @@ let loginPage: OrangeHRMLoginPage;
 let dashboardPage: OrangeHRMDashboardPage;
 let recruitmentPage: OrangeHRMRecruitmentPage;
 
-Given('User logs into OrangeHRM', { timeout: 30000 }, async () => {
+Given('User logs into OrangeHRM', { timeout: 30000 }, async function () {
     // Get page instance from hooks
     const page = (global as any).page;
     
+    // Get baseUrl from world parameters
+    const baseUrl = this.parameters.baseUrl;
+    
     // Initialize Login Page Object
     loginPage = new OrangeHRMLoginPage(page);
-    await loginPage.navigateToLoginPage();
+    await loginPage.navigateToLoginPage(baseUrl);
     await loginPage.login('Admin', 'admin123');
 });
 

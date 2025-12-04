@@ -1,15 +1,44 @@
+const commonConfig = {
+  requireModule: ['ts-node/register'],
+  require: ['src/test/steps/**/*.ts', 'src/main/hooks.ts'],
+  format: [
+    'progress',
+    'html:playwright-report/cucumber-html-report.html',
+    'json:playwright-report/reports/cucumber-report.json'
+  ],
+  formatOptions: {
+    snippetInterface: 'async-await'
+  },
+  publishQuiet: true
+};
+
 module.exports = {
   default: {
-    requireModule: ['ts-node/register'],
-    require: ['src/test/steps/**/*.ts', 'src/main/hooks.ts'],
-    format: ['progress', 'html:cucumber-report.html'],
-    formatOptions: {
-      snippetInterface: 'async-await'
-    },
-    publishQuiet: true,
+    ...commonConfig,
     worldParameters: {
-      //baseUrl: 'https://www.google.com'
-      baseUrl: 'https://opensource-demo.orangehrmlive.com/web/index.php/auth/login'
+      baseUrl: 'https://opensource-demo.orangehrmlive.com/web/index.php/auth/login',
+      environment: 'default'
+    }
+  },
+  test: {
+    ...commonConfig,
+    worldParameters: {
+      baseUrl: 'https://opensource-demo.orangehrmlive.com/web/index.php/auth/login',
+      environment: 'test'
+    }
+  },
+  stage: {
+    ...commonConfig,
+    worldParameters: {
+      baseUrl: 'https://stage.orangehrmlive.com',
+      environment: 'stage'
+    }
+  },
+  prod: {
+    ...commonConfig,
+    worldParameters: {
+      baseUrl: 'https://orangehrmlive.com',
+      environment: 'prod'
     }
   }
 };

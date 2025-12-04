@@ -22,9 +22,10 @@ export class OrangeHRMLoginPage {
     
     /**
      * Navigates to the OrangeHRM login page
+     * @param baseUrl - The base URL of the application (e.g., 'https://opensource-demo.orangehrmlive.com/')
      */
-    async navigateToLoginPage(): Promise<void> {
-        await this.page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+    async navigateToLoginPage(baseUrl: string = 'https://opensource-demo.orangehrmlive.com/'): Promise<void> {
+        await this.page.goto(baseUrl);
         await this.page.waitForLoadState('networkidle');
         await this.usernameInput.waitFor({ state: 'visible', timeout: 10000 });
     }

@@ -1,4 +1,4 @@
-import { Before, After, BeforeAll, AfterAll } from '@cucumber/cucumber';
+import { Before, After, BeforeAll, AfterAll, AfterStep } from '@cucumber/cucumber';
 import { chromium, Browser, Page, BrowserContext } from 'playwright';
 import path from 'path';
 import fs from 'fs';
@@ -64,6 +64,28 @@ Before({ timeout: 30000 }, async function () {
     } catch (error) {
         console.error('❌ Browser setup failed:', error);
         throw error;
+    }
+});
+
+// After each step - capture screenshot
+AfterStep(async function (step) {
+    try {
+        if (page) {
+            const stepName = step.pickleStep?.text || 'unknown-step';
+            const timestamp = Date.now();
+            const screenshotPath = path.join(screenshotsDir, `step-${stepName.replace(/[^a-zA-Z0-9]/g, '-')}-${timestamp}.png`);
+            
+            const screenshot = await page.screenshot({ 
+                path: screenshotPath,
+                fullPage: true 
+            });
+            
+            // Attach screenshot to Cucumber report
+            this.attach(screenshot, 'image/png');
+            console.log(`📷 Step screenshot captured: ${screenshotPath}`);
+        }
+    } catch (error) {
+        console.error('⚠️ Error capturing step screenshot:', error);
     }
 });
 

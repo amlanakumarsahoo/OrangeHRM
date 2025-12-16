@@ -3,13 +3,15 @@ import { expect } from '@playwright/test';
 import { OrangeHRMLoginPage } from '../../main/pages/OrangeHRMLoginPage';
 import { OrangeHRMDashboardPage } from '../../main/pages/OrangeHRMDashboardPage';
 import { OrangeHRMRecruitmentPage } from '../../main/pages/OrangeHRMRecruitmentPage';
+import { OrangeHRMLogoutPage } from '../../main/pages/OrangeHRMLogoutPage';
 
 // Declare page objects
 let loginPage: OrangeHRMLoginPage;
 let dashboardPage: OrangeHRMDashboardPage;
 let recruitmentPage: OrangeHRMRecruitmentPage;
+let logoutPage: OrangeHRMLogoutPage;
 
-Given('User logs into OrangeHRM', { timeout: 30000 }, async function () {
+Given('User logs into OrangeHRM {word} and {word}', { timeout: 30000 }, async function (username: string, password: string) {
     // Get page instance from hooks
     const page = (global as any).page;
     
@@ -19,7 +21,13 @@ Given('User logs into OrangeHRM', { timeout: 30000 }, async function () {
     // Initialize Login Page Object
     loginPage = new OrangeHRMLoginPage(page);
     await loginPage.navigateToLoginPage(baseUrl);
-    await loginPage.login('Admin', 'admin123');
+    await loginPage.login(username, password);
+    
+    // Verify login was successful
+    const isLoggedIn = await loginPage.isLoggedIn();
+    if (!isLoggedIn) {
+        throw new Error(`Login failed for user: ${username}`);
+    }
 });
 
 When('User is on the dashboard page', async function () {
@@ -78,4 +86,23 @@ Then('Lead should be created successfully', async function () {
     
     // const leadExists = await recruitmentPage.isLeadVisible('Automation Test Lead');
     // expect(leadExists).toBeTruthy();
+});
+
+Then('user logout from application', async function () {
+    // Get page instance from hooks
+    const page = (global as any).page;
+    
+    // Initialize Logout Page Object
+    logoutPage = new OrangeHRMLogoutPage(page);
+    
+    // Perform logout
+    await logoutPage.logout();
+    
+    // Verify logout was successful
+    const isLoggedOut = await logoutPage.isLoggedOut();
+    expect(isLoggedOut).toBeTruthy();
+    
+    // Additional verification - check current URL
+    const currentUrl = await logoutPage.getCurrentUrl();
+    expect(currentUrl).toMatch(/\/auth\/login|\/login/);
 });

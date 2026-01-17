@@ -1,4 +1,4 @@
-import { Before, After, BeforeAll, AfterAll, AfterStep } from '@cucumber/cucumber';
+import { Before, After, BeforeAll, AfterAll, AfterStep, setDefaultTimeout } from '@cucumber/cucumber';
 import { chromium, Browser, Page, BrowserContext } from 'playwright';
 import path from 'path';
 import fs from 'fs';
@@ -6,6 +6,9 @@ import fs from 'fs';
 let browser: Browser;
 let context: BrowserContext;
 let page: Page;
+
+// Set global timeout for all Cucumber steps
+setDefaultTimeout(60000); // 60 seconds
 
 // Create directories for videos and screenshots
 const videosDir = path.join('results', 'videos');
@@ -29,7 +32,7 @@ AfterAll(async function () {
 });
 
 // Before each scenario
-Before({ timeout: 30000 }, async function () {
+Before({ timeout: 60000 }, async function () {
     console.log('🌟 Setting up browser for scenario...');
     
     try {
@@ -54,6 +57,10 @@ Before({ timeout: 30000 }, async function () {
         
         // Create new page
         page = await context.newPage();
+        
+        // Set timeouts on page level
+        page.setDefaultTimeout(60000); // 60 seconds for all operations
+        page.setDefaultNavigationTimeout(60000); // 60 seconds for navigation
         
         // Store in global scope for step definitions
         (global as any).browser = browser;

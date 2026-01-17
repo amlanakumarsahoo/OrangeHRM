@@ -1,5 +1,5 @@
 const commonConfig = {
-  requireModule: ['ts-node/register'],
+  requireModule: ['ts-node/register', 'tsconfig-paths/register'],
   require: ['src/test/steps/**/*.ts', 'src/main/hooks.ts'],
   format: [
     'progress',
@@ -9,14 +9,16 @@ const commonConfig = {
   formatOptions: {
     snippetInterface: 'async-await'
   },
-  publishQuiet: true
+  publishQuiet: true,
+  // Global timeout settings
+  timeout: 60000 // 60 seconds for each step
 };
 
 module.exports = {
   default: {
     ...commonConfig,
     worldParameters: {
-      baseUrl: 'https://opensource-demo.orangehrmlive.com/web/index.php/auth/login',
+      baseUrl: 'https://automationexercise.com/',
       environment: 'default'
     }
   },

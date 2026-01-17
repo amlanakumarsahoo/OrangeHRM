@@ -11,6 +11,8 @@ import { TestCasePage } from "../web-implementation/TestCasePage";
 import { TestCasePageOperations } from "../operations/TestCasePageOperations";
 import { ProductsPageOperations } from "../operations/ProductsPageOperations";
 import { ProductsPage } from "../web-implementation/ProductsPage";
+import { CartPage } from "../web-implementation/CartPage";
+import { CartPageOperations } from "../operations/CartPageOperations";
 
 // export function getAutoExeUrl(): string {
 //     // Get URL from config or environment
@@ -38,9 +40,9 @@ export async function getProductsPageApp(page: Page): Promise<ProductsPageOperat
     return await ProductsPage.create(page);
 }
 
-// export function getTestHelpers(page: Page): TestHelpers {
-//     return TestHelpers.create(page);
-// }
+export async function getCartPageApp(page: Page): Promise<CartPageOperations> {
+    return await CartPage.create(page);
+}
 
 // Common test data generators
 export const testData = {

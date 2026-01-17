@@ -3,3 +3,8 @@ node_modules/
 # .vscode/ - commented out to allow settings configuration
 playwrightPractice/
 gitignore/
+results/
+playwright-report/
+playwright-video/
+
+

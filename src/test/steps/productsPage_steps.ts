@@ -40,9 +40,10 @@ import { ProductsPageOperations } from '../../main/operations/ProductsPageOperat
 import { getProductsPageApp } from '../../main/utilities/autoExe-utils';
 
 export let productsPage: ProductsPageOperations;
-const page = (global as any).page;
+
 // Step: Navigate to Products tab
 When('User navigates to Products tab', async function () {
+    const page = (global as any).page;
     productsPage = await getProductsPageApp(page) as ProductsPageOperations;
     await productsPage.navigateToProductsPage();
 });
@@ -70,4 +71,9 @@ Then('User landed to product detail page', async function () {
 // Step: Verify product attributes
 Then('User verifies product name, category, price, availability, condition, brand', async function () {
     expect(await productsPage.verifyProductDetails()).toBeTruthy();
+});
+
+// Step: Search for product
+Then('User search for product {string}', async function (productName: string) {
+    await productsPage.searchProduct(productName);
 });

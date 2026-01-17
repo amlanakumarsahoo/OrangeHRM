@@ -4,4 +4,5 @@ export interface ProductsPageOperations {
     verifyProductListCount(): Promise<number>;
     viewFirstProduct(): Promise<void>;
     verifyProductDetails(): Promise<boolean>;
-}
+    searchProduct(productName: string): Promise<void>;
+}   

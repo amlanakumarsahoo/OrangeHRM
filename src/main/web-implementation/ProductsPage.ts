@@ -13,6 +13,8 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
     private readonly productBrand: Locator;
     private readonly viewFirstProductBtn: Locator;
     private readonly productList: Locator;
+    private readonly searchProductTextBox: Locator;
+    private readonly searchProductBtn: Locator;
 
     constructor(page: any) {
         super();
@@ -27,6 +29,8 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
         this.productCondition = page.getByText('Condition: New');
         this.productBrand = page.getByText('Brand: Polo');
         this.productList = page.locator('.single-products');
+        this.searchProductTextBox = page.getByRole('textbox', { name: 'Search Product' })
+        this.searchProductBtn = page.getByRole('button', { name: '' })
     }
     static async create(page: Page): Promise<ProductsPage> {
         return new ProductsPage(page);
@@ -57,5 +61,9 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
  
     async navigateToProductsPage(): Promise<void> {
         await this.productsTab.click();
+    }
+    async searchProduct(productName: string): Promise<void> {
+        await this.searchProductTextBox.fill(productName);
+        await this.searchProductBtn.click();
     }
 }

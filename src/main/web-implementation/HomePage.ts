@@ -1,7 +1,7 @@
 import { HomePageOperations } from "@src/main/operations/HomePageOperations";
 import { BasePage } from "@src/main/web-implementation/BasePage";
 import { Page, Locator } from '@playwright/test';
-import { faker } from "@faker-js/faker/.";
+import { faker } from "@faker-js/faker";
 export class HomePage extends BasePage implements HomePageOperations {
     //private readonly page;
     private readonly subTitleSelector: Locator; // data-testid = subtitle

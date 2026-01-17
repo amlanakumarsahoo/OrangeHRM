@@ -40,10 +40,10 @@ import { ProductsPageOperations } from '../../main/operations/ProductsPageOperat
 import { getProductsPageApp } from '../../main/utilities/autoExe-utils';
 
 export let productsPage: ProductsPageOperations;
-
+const page = (global as any).page;
 // Step: Navigate to Products tab
-When('User navigates to Products tab', async function (this: { page: Page }) {
-    productsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
+When('User navigates to Products tab', async function () {
+    productsPage = await getProductsPageApp(page) as ProductsPageOperations;
     await productsPage.navigateToProductsPage();
 });
 

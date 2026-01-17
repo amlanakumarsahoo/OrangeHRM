@@ -27,3 +27,16 @@ When('User Observes sub Title', async function () {
 Then('sub title should match {string}', async function (_arg: string) {
     expect(actualResult).toEqual(_arg);
 });
+
+  When('Subscription should be visible', async function () {
+    expect(await homePage.getSubscriptionHeader()).toBeTruthy();
+});
+
+When('User enters email id and clicks on subscribe button', async function () {
+    await homePage.enterEmailIdAndClickSubscribeButton();
+});
+
+Then('User should be able to verify subscription message {string}', async function (_arg: string) {
+    actualResult = await homePage.getSubscriptionMessage();
+    expect(actualResult).toEqual(_arg);
+}); 

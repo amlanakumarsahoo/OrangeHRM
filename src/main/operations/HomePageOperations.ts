@@ -1,10 +1,11 @@
 import { AutoExeAppOperations } from "./AutoExeAppOperations";
-interface HomePageOperations  extends AutoExeAppOperations{
+export interface HomePageOperations  extends AutoExeAppOperations{
     getTitle(): Promise<string|null>;
     getSubTitle(): Promise<string|null>;
     getAvailableExamples(): Promise<string[]|null>;
     getFooterText(): Promise<string|null>;
-    //gotoExample(exampleName:string): Promise<AutoExeAppOperations>;
- 
+    getSubscriptionHeader(): Promise<boolean|null>;
+    enterEmailIdAndClickSubscribeButton(): Promise<void>;
+    getSubscriptionMessage(): Promise<string|null>;
 }
- export type { HomePageOperations };
+

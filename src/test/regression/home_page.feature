@@ -7,6 +7,12 @@ Given User Visits HomePage
 When User Observes HomePage Title
 Then title should match "Automation Exercise"
 
-
- 
+@SubscriptionHomePage_TC002 @Regression
+Scenario: Verify Subscription in home page
+Given User Visits HomePage
+When User Observes HomePage Title
+Then title should match "Automation Exercise"
+Then Subscription should be visible
+Then User enters email id and clicks on subscribe button
+Then User should be able to verify subscription message "You have been successfully"
 

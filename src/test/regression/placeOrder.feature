@@ -1,7 +1,7 @@
 Feature: automationexercise application Place Order functionality
 
-    @PlaceOrder_TC001 @Regression
-    Scenario:Place Order functionality
+    @PlaceOrder_TC001 @Regression @TC014
+    Scenario:Place Order: Register while Checkout
         Given User Visits HomePage
         When User Observes HomePage Title
         Then title should match "Automation Exercise"
@@ -14,13 +14,19 @@ Feature: automationexercise application Place Order functionality
         Then User click on Proceed To Checkout button
         Then User click on Register Login button
         Then User signup and create account
-        # Then user should be able to verify loggedin user
+        Then user should be able to verify loggedin user
         Then User navigates to cart page
         Then user should be redirected to the cart page
         Then User click on Proceed To Checkout button
         Then User verify address details and review order
         Then User enter description
         Then User click on place order button
+        Then User Enter payment details
+        Then User Confirm order
+        Then User verify congatulations message
+        Then user should able to delete the account
+        Then user verify the account deleted confirmation
+        Then user clicks on continue button
 
     @VerifyAddressDetailsInCheckoutPage_TC002 @Regression @TC023
     Scenario: Verify address details in checkout page

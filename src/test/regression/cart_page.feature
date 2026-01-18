@@ -2,8 +2,8 @@ Feature: automationexercise application Cart Page functionality
     As a User when I visit the automationexercise application
     I should see a valid Title
 
-    @CartPage_TC001 @Regression
-    Scenario: Cart Page has a valid Title
+    @CartPage_TC001 @Regression @TC011
+    Scenario: Verify Subscription in Cart page
         Given User Visits HomePage
         When User Observes HomePage Title
         Then title should match "Automation Exercise"
@@ -13,7 +13,7 @@ Feature: automationexercise application Cart Page functionality
         Then User enters email id and clicks on subscribe button
         Then User should be able to verify subscription message "You have been successfully subscribed!"
 
-    @AddProductsInCart_TC002 @Regression
+    @AddProductsInCart_TC002 @Regression @TC012
     Scenario: Add Products in Cart
         Given User Visits HomePage
         When User Observes HomePage Title
@@ -27,7 +27,7 @@ Feature: automationexercise application Cart Page functionality
         Then User navigates to cart page
         Then User verify price quantity and total price
 
-    @VerifyProductQuantityInCart_TC003 @Regression
+    @VerifyProductQuantityInCart_TC003 @Regression @TC013
     Scenario Outline:Verify Product quantity in Cart
         Given User Visits HomePage
         When User Observes HomePage Title
@@ -44,7 +44,7 @@ Feature: automationexercise application Cart Page functionality
             | quantity |
             | 4        |
 
-    @Remove_Products_From_Cart_TC004 @Regression @TC018
+    @Remove_Products_From_Cart_TC004 @Regression @TC017
     Scenario: Remove Products From Cart
         Given User Visits HomePage
         When User Observes HomePage Title

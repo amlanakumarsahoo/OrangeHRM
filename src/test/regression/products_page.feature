@@ -1,6 +1,6 @@
 Feature: automationexercise application products page functionality
 
-    @VerifyProductsPage_TC001 @Regression
+    @VerifyProductsPage_TC001 @Regression @TC008
     Scenario: Verify All Products and product detail page
         Given User Visits HomePage
         When User Observes HomePage Title
@@ -11,7 +11,7 @@ Feature: automationexercise application products page functionality
         Then User landed to product detail page
         Then User verifies product name, category, price, availability, condition, brand
 
-    @SearchProducts_TC002 @Regression
+    @SearchProducts_TC002 @Regression @TC009
     Scenario: Verify Search Products functionality
         Given User Visits HomePage
         When User Observes HomePage Title

@@ -7,7 +7,7 @@ Given User Visits HomePage
 When User Observes HomePage Title
 Then title should match "Automation Exercise"
 
-@SubscriptionHomePage_TC002 @Regression
+@SubscriptionHomePage_TC002 @Regression @TC010
 Scenario: Verify Subscription in home page
 Given User Visits HomePage
 When User Observes HomePage Title

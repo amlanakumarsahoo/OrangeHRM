@@ -7,4 +7,5 @@ export interface CartPageOperations {
     navigateToCartPage(): Promise<void>;
     verifyAllProductsAddedToCart(): Promise<boolean>;
     verifyPriceQuantityAndTotalPrice(): Promise<boolean|null>;
+    verifyProductQuantityInShoppingCart(quantity: number): Promise<number>;
 }

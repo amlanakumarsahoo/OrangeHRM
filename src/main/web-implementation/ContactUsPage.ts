@@ -37,14 +37,16 @@ export class ContactUsPage extends BasePage implements ContactusOperations {
         const instance = new ContactUsPage(page);
         return instance;
     }
-    
+    //Navigate to contact us
     async navigateToContactUs(): Promise<void> {
         await this.contactUsBtn.click();
         await this.getInTouchFormTitle.waitFor({ state: 'visible', timeout: 10000 });
     }
+    //Get contact us title
     async getContactUsTitle(): Promise<boolean | null> {
         return this.getInTouchFormTitle.isVisible();
     }
+    //Fill contact us form
     async fillContactUsForm(Name: string, Email: string, Subject: string, Message: string): Promise<void | null> {
         await this.name.fill(Name);
         await this.email.fill(Email);
@@ -52,22 +54,28 @@ export class ContactUsPage extends BasePage implements ContactusOperations {
         await this.message.fill(Message);
     
     }
+    //Attach file
     async attachFile(filepath:string): Promise<void | null> {
         await this.fileAttachment.setInputFiles(filepath,{timeout: 10000});
     }
+    //Submit contact us form
     async submitContactUsForm(): Promise<void | null> {
         await this.submitButton.click({timeout: 10000});
         await this.page.waitForTimeout(9000);
     }
+    //Do press ok
     async doPressOk(): Promise<void | null> {
         await this.okButton.click({timeout: 10000});
     }
+    //Get contact us confirmation
     async getContactUsConfirmation(): Promise<string | null> {
         return this.confirmationMessage.textContent();
     }
+    //Navigate to home page
     async navigateToHomePage(): Promise<void> {
         await this.homePageBtn.click();
     }
+    //Get home page title
     async getHomePageTitle(): Promise<boolean | null> {
         return this.page.title();
     }

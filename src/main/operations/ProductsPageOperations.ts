@@ -5,4 +5,6 @@ export interface ProductsPageOperations {
     viewFirstProduct(): Promise<void>;
     verifyProductDetails(): Promise<boolean>;
     searchProduct(productName: string): Promise<void>;
+    updateQuantity(quantity: number): Promise<number>;
+    addToCart(): Promise<void>;
 }   

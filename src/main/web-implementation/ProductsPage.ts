@@ -15,6 +15,9 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
     private readonly productList: Locator;
     private readonly searchProductTextBox: Locator;
     private readonly searchProductBtn: Locator;
+    private readonly productQuantityInput: Locator;
+    private readonly addToCartBtn: Locator;
+    
 
     constructor(page: any) {
         super();
@@ -31,11 +34,14 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
         this.productList = page.locator('.single-products');
         this.searchProductTextBox = page.getByRole('textbox', { name: 'Search Product' })
         this.searchProductBtn = page.getByRole('button', { name: '' })
+        this.productQuantityInput = page.locator('#quantity');
+        this.addToCartBtn = page.getByRole('button', { name: ' Add to cart' })
     }
+    //Create instance of ProductsPage
     static async create(page: Page): Promise<ProductsPage> {
         return new ProductsPage(page);
     }
-    
+    //Navigate to products page
     async verifyAllProductsPage(): Promise<string> {
         return await this.productsPageHeader.textContent() as string;
     }
@@ -44,9 +50,11 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
         console.log("Product count in ProductsPage: " + productCount);
         return productCount;
     }
+    //View first product
     async viewFirstProduct(): Promise<void> {
         await this.viewFirstProductBtn.click();
     }
+    //Verify product details
     async verifyProductDetails(): Promise<boolean> {
         try {
             if(await this.productName.isVisible() && await this.productCategory.isVisible() && await this.productPrice.isVisible() && await this.productAvailability.isVisible() && await this.productCondition.isVisible() && await this.productBrand.isVisible()) {
@@ -58,12 +66,21 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
             return false;
         }
     }
- 
+    //Navigate to products page
     async navigateToProductsPage(): Promise<void> {
         await this.productsTab.click();
     }
     async searchProduct(productName: string): Promise<void> {
         await this.searchProductTextBox.fill(productName);
         await this.searchProductBtn.click();
+    }
+    //Update quantity
+    async updateQuantity(quantity: number): Promise<number> {
+        await this.productQuantityInput.fill(quantity.toString());
+        return quantity;
+    }
+    //Add to cart
+    async addToCart(): Promise<void> {
+        await this.addToCartBtn.click();
     }
 }

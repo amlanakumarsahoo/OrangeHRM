@@ -43,7 +43,7 @@ export class HomePage extends BasePage implements HomePageOperations {
         await instance.navigate();
         return instance;
     }
-
+    //Navigate to home page
     async navigate(): Promise<void> {
         try {
             console.log('🌐 Starting navigation to automationexercise.com...');
@@ -65,34 +65,40 @@ export class HomePage extends BasePage implements HomePageOperations {
             throw new Error(`Failed to navigate to automationexercise.com: ${error?.message || error}`);
         }
     }
-
+    //Get footer text
     getFooterText(): Promise<string | null> {
         throw new Error("Method not implemented.");
     }
-   
+    //Get subtitle
     async getSubTitle(): Promise<string | null> {
         await this.page.waitForLoadState('domcontentloaded');
         return this.subTitleSelector.textContent();
     }
+    //Get available examples
     async getAvailableExamples(): Promise<string[] | null> {
         await this.page.waitForLoadState('domcontentloaded');
         return this.exampleSelector.allTextContents();
     }
+    //Get title
     async getTitle(): Promise<string | null> {
         // Implementation to get the title from the home page
         //await this.page.waitForLoadState('domcontentloaded');
         return this.titleSelector.textContent();
     }
+    //Get subscription header
     async getSubscriptionHeader(): Promise<boolean | null> {
         return this.subscriptionHeaderSelector.isVisible();
     }
+    //Enter email id and click subscribe button
     async enterEmailIdAndClickSubscribeButton(): Promise<void> {
         await this.emailIdSelector.fill(faker.internet.email());
         await this.subscribeButtonSelector.click();
     }
+    //Get subscription message
     async getSubscriptionMessage(): Promise<string | null> {
         return this.subscriptionMessageSelector.textContent();
     }
+    //Click on view product
     async clickOnViewProduct(): Promise<void> {
         await this.viewProductSelector.click();
     }

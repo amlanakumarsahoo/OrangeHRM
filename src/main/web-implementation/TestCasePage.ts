@@ -11,14 +11,15 @@ export class TestCasePage extends BasePage implements TestCasePageOperations {
         this.testCasesTab = page.getByRole('link', { name: ' Test Cases' })
         this.testCasesPageTitle = page.getByRole('link', { name: ' Test Cases' })
     }
-
+    //Create instance of TestCasePage
     static create(page: Page): TestCasePage {
         return new TestCasePage(page);
     }
-    
+    //Navigate to test cases page
     async navigateToTestCase(): Promise<void> {
         await this.testCasesTab.click();
     }
+    //Get test cases page title
     async getTestCaseTitle(): Promise<string|null> {
         return this.testCasesPageTitle.textContent();
     }

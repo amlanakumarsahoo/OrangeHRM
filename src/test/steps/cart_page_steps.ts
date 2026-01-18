@@ -22,6 +22,8 @@ Then('User add first product to cart', async function () {
 });
 
 Then('User click on continue shopping button', async function () {
+    const page = (global as any).page;
+    cartPage = await getCartPageApp(page) as CartPageOperations;
     await cartPage.clickOnContinueShopping();
 });
 
@@ -41,4 +43,7 @@ Then('User verify price quantity and total price', async function () {
     expect(await cartPage.verifyPriceQuantityAndTotalPrice()).toBeTruthy();
 });
 
+Then('User validate with expected product quantity {string}', async function (quantity: string) {
+    expect(await cartPage.verifyProductQuantityInShoppingCart(parseInt(quantity))).toEqual(parseInt(quantity));
+});
 

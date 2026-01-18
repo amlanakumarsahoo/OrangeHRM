@@ -1,4 +1,4 @@
-import { Given, When, Then } from '@cucumber/cucumber';
+import { Given, When, Then, DataTable } from '@cucumber/cucumber';
 import { expect, Page } from '@playwright/test';
 import { ProductsPageOperations } from '../../main/operations/ProductsPageOperations';
 import { getProductsPageApp } from '../../main/utilities/autoExe-utils';
@@ -40,3 +40,16 @@ Then('User verifies product name, category, price, availability, condition, bran
 Then('User search for product {string}', async function (productName: string) {
     await productsPage.searchProduct(productName);
 });
+
+// Step: Increase product quantity
+Then('User increse the product quantity to {string}', async function (quantityStr: string) {
+    const quantity = parseInt(quantityStr, 10);
+    const updatedQuantity = await productsPage.updateQuantity(quantity);
+    console.log(`Product quantity updated to: ${updatedQuantity}`);
+});
+
+// Step: Click on Add to cart button
+Then('User click on Add to cart button', async function () {
+    await productsPage.addToCart();
+});
+

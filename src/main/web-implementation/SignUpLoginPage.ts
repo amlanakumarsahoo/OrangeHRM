@@ -79,33 +79,40 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
         this.alreadyExistEmail = page.getByText('Email Address already exist!')
     }   
     [x: string]: any;
+    //Get user password
     async getUserPassword(): Promise<void> {
         await this.password.fill(faker.person.firstName()+"@123");
     }
+    //Get user name
     async getUserName(username: string): Promise<void> {
         await this.userName.fill(username);
     }
+    //Get email address
     async getEmailAddress(emailAddress: string): Promise<void> {
         await this.emailAddress.fill(emailAddress)
     }
+    //Do sign up
     async doSignUp(): Promise<void> {
         // await this.page.waitForLoadState('networkidle')
         await this.signUpButton.click();
     }
+    //Create instance of SignUpLoginPage
     static async create(page: Page) {
         const instance = new SignUpLoginPage(page);
         return instance;
     }
+    //Do sign up login
     async doSignUpLogin(): Promise<void | null> {
         await this.signupBtn.click();
     }
+    //Verify creation of new user
     async verifyCreationOfNewUser(): Promise<boolean | null> {
         if(await this.newCreatedUser.isVisible()) {
             return true;
         }
         return false;
     }
-
+    //Get user DOB
     async getUserDOB(): Promise<void>{
         // Wait for all DOB dropdowns to be ready
         await this.userDOB_day.waitFor({ state: 'visible' });
@@ -132,13 +139,15 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
         const year = faker.number.int({ min: 1900, max: 2021 }).toString();
         await this.userDOB_year.selectOption(year, { timeout: 10000 });
     }
- 
+    //Get sign up news letter
     async getSignUpNewsLetter(): Promise<void> {
         await this.signUpNewsLetter.click();
     }
+    //Get receive special offers
     async getReceiveSpecialOffers(): Promise<void> {
         await this.receiveSpecialOffers.click();
     }
+    //Get user address info
     async getUserAddressInfo(country: string, state: string, city: string, zipCode: string, mobileNumber: string): Promise<void> {
         const firstName = faker.person.firstName();
         const lastName = faker.person.lastName();
@@ -183,10 +192,12 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
         
         console.log(`User Address Information: First Name: ${firstName}, Last Name: ${lastName}, Company: ${company}, Address1: ${address1}, Address2: ${address2}, Country: ${country}, State: ${state}, City: ${city}, Zip Code: ${zipCode}, Mobile Number: ${usPhone}`);
     }
+    //Do submit form
     async doSubmitForm(): Promise<void> {
         // await this.page.waitForLoadState('networkidle');
         await this.createAccountButton.click({ timeout: 5000 }); 
     }
+    //Get account created confirmation
     async getAccountCreatedConfirmation(): Promise<boolean | null> {
         const confirmationText = await this.accountCreatedConfirmation.textContent();
         if (confirmationText?.includes('Account Created!')) {
@@ -194,9 +205,11 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
         }
         return false;
     }
+    //Do continue
     async doContinue(): Promise<void> {
         await this.continueButton.click({ timeout: 9000 }); 
     }
+    //Get logged in user
     async getLoggedInUser(): Promise<boolean | null> {
         try {
             const loggedInUserText = await this.page.locator('li:has-text("Logged in as")').textContent({ timeout: 5000 });
@@ -208,22 +221,26 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
             console.log('Could not find logged in user text:', error);
             return false;
         }
-    } 
+    }
+    // Delete Account
     async deleteAccount(): Promise<void> {
         await this.deleteAccountButton.click({ timeout: 5000 }); 
     }  
+    //Get account deleted confirmation
     async getAccountDeletedConfirmation(): Promise<boolean | null> {
         const confirmationText = await this.accountDeletedConfirmation.textContent();
         if (confirmationText?.includes('Account Deleted!')) {
             return true;
         }
         return false;
-    }     
+    }
+    //Get user login info
     async getUserLoginInfo(emailAddress: string, password: string): Promise<void> {
         await this.loginEmailAddress.fill(emailAddress,{timeout:5000});
         await this.loginPassword.fill(password,{timeout:5000});
         await this.loginButton.click({ timeout: 5000 }); 
     }
+    //Verify logged in user
     async verifyLoggedInUser(): Promise<boolean | null> {
         try {
             const loggedInUserText = await this.page.locator('li:has-text("Logged in as")').textContent({ timeout: 5000 });
@@ -236,6 +253,7 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
             return false;
         }
     } 
+    //Get login failed confirmation
     async getLoginFailedConfirmation(): Promise<boolean | null> {
         const failedConfirmationText = await this.loginFailedConfirmation.textContent({ timeout: 9000 });
         if (failedConfirmationText?.includes('Your email or password is incorrect')) {
@@ -243,9 +261,11 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
         }
         return false;
     }   
+    //Do logout
     async logout(): Promise<void> {
         await this.logoutButton.click({ timeout: 5000 }); 
     }
+    //Get already exist email
     async getAlreadyExistEmail(): Promise<string | null> {
         const alreadyExistEmailText = await this.alreadyExistEmail.textContent({ timeout: 9000 });
         return alreadyExistEmailText;

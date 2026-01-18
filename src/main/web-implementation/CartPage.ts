@@ -3,7 +3,7 @@ import { CartPageOperations } from "../operations/CartPageOperations";
 import { BasePage } from "./BasePage";
 
 export class CartPage extends BasePage implements CartPageOperations {
-    private readonly cartPageBtn: Locator;
+    private readonly cartPageTab: Locator;
     private readonly cartPageTitle: Locator;
     private readonly ProductOneAddToCartButton: Locator;
     private readonly ProductTwoAddToCartButton: Locator;
@@ -19,7 +19,7 @@ export class CartPage extends BasePage implements CartPageOperations {
     constructor(page: any) {
         super();
         this.page = page;
-        this.cartPageBtn = page.getByRole('link', { name: ' Cart' });
+        this.cartPageTab = page.getByRole('link', { name: ' Cart' });
         this.cartPageTitle = page.getByText('Shopping Cart')
         this.ProductOneAddToCartButton = page.locator('(//a[@data-product-id="1"])[1]');
         this.ProductTwoAddToCartButton = page.locator('(//a[@data-product-id="2"])[1]');
@@ -41,7 +41,7 @@ export class CartPage extends BasePage implements CartPageOperations {
 
     //Navigate to cart page
     async navigateToCartPage(): Promise<void> {
-        await this.cartPageBtn.click();
+        await this.cartPageTab.click();
         await this.cartPageTitle.waitFor({ state: 'visible', timeout: 10000 });
     }
 
@@ -96,5 +96,11 @@ export class CartPage extends BasePage implements CartPageOperations {
             return true;
         }
         else return false;
+    }
+
+    //Verify product quantity   
+    async verifyProductQuantityInShoppingCart(quantity: number): Promise<number> {
+        const productQuantity = await this.cartFirstProductQuantity.textContent();
+        return Number(productQuantity);
     }
 }

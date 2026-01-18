@@ -34,11 +34,11 @@ When User Observes HomePage Title
 Then title should match "Automation Exercise"
 Then User click on view product from home page 
 Then User verifies product name, category, price, availability, condition, brand 
-# Then User increse the quantity
-# Then User click on Add to cart button 
-# Then User click on continue shopping button
-# Then User navigates to cart page 
-# Then User validate with expected product quantity
+Then User increse the product quantity to "<quantity>"
+Then User click on Add to cart button 
+Then User click on continue shopping button
+Then User navigates to cart page 
+Then User validate with expected product quantity "<quantity>"
 
 Examples:
 | quantity |

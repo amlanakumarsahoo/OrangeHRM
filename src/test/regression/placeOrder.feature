@@ -22,6 +22,35 @@ Feature: automationexercise application Place Order functionality
         Then User enter description
         Then User click on place order button
 
+    @VerifyAddressDetailsInCheckoutPage_TC002 @Regression @TC023
+    Scenario: Verify address details in checkout page
+        Given User Visits HomePage
+        When User Observes HomePage Title   
+        Then title should match "Automation Exercise"
+        Then user should be able to click on signup button
+        Then user should be able to verify creation of new user
+        Then user fill the user password information
+        Then user fill the user DOB information
+        Then user fill the user news letter information
+        Then user fill the user special offers information
+        Then user fill the user address information
+            | country       | state    | city     | zipCode | mobileNumber |
+            | United States | New York | New York | 10001   | 1234567890   |
+        Then user should be able to submit the signup form
+        Then user should be able to verify account created confirmation
+        Then user clicks on continue button
+        Then user should be able to verify loggedin user
+        Then User click on view product from home page
+        Then User verifies product name, category, price, availability, condition, brand
+        Then User click on Add to cart button
+        Then User click on continue shopping button
+        Then User navigates to cart page
+        Then User click on Proceed To Checkout button
+        Then User verify address details and review order
+        Then User enter description
+        Then user should able to delete the account
+        Then user verify the account deleted confirmation
+        Then user clicks on continue button
   
 
 

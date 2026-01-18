@@ -113,11 +113,6 @@ Then('User verify "RECOMMENDED ITEMS" is visible', async function () {
     expect(await localProductsPage.verifyRecommendedItems()).toBeTruthy();
 });
 
-    // Step: Navigate to cart page
-    Then('User navigates to cart page', async function () {
-        await productsPage.navigateToCartPage();
-    });
-
     // Step: User click on view cart link
     Then('User click on view cart link', async function () {
         const page = (global as any).page;

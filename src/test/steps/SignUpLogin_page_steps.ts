@@ -122,3 +122,9 @@ Then('user should be able to enter existing username {string}', async function (
 Then('user should be able to enter existing email address {string}', async function (emailaddress: string) {
     await signUpLoginPage.getEmailAddress(emailaddress);
 });
+
+Then('User signup and create account', async function () {
+    const page = (global as any).page;
+    signUpLoginPage = await getSignUpLoginApp(page) as SignUpLoginPageOperations;
+    await signUpLoginPage.createAccount();
+});

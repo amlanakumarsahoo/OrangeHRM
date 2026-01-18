@@ -47,3 +47,17 @@ Then('User validate with expected product quantity {string}', async function (qu
     expect(await cartPage.verifyProductQuantityInShoppingCart(parseInt(quantity))).toEqual(parseInt(quantity));
 });
 
+Then('User click on Proceed To Checkout button', async function () {
+    await cartPage.clickOnProceedToCheckout();
+});
+
+Then('User click on Register Login button', async function () {
+    await cartPage.clickOnRegisterLogin();
+});
+
+// Then('User verify Address Details and Review Your Order', async function () {
+//     // await cartPage.verifyShippingAddress();
+//     // await cartPage.verifyBillingAddress();
+//     // await cartPage.verifyReviewYourOrder();
+// });
+

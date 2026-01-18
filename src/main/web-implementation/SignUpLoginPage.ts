@@ -78,6 +78,7 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
         this.logoutButton = page.locator("//a[@href='/logout']");
         this.alreadyExistEmail = page.getByText('Email Address already exist!')
     }   
+
     [x: string]: any;
     //Get user password
     async getUserPassword(): Promise<void> {
@@ -91,9 +92,8 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
     async getEmailAddress(emailAddress: string): Promise<void> {
         await this.emailAddress.fill(emailAddress)
     }
-    //Do sign up
+    //Click on sign up button
     async doSignUp(): Promise<void> {
-        // await this.page.waitForLoadState('networkidle')
         await this.signUpButton.click();
     }
     //Create instance of SignUpLoginPage
@@ -269,5 +269,28 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
     async getAlreadyExistEmail(): Promise<string | null> {
         const alreadyExistEmailText = await this.alreadyExistEmail.textContent({ timeout: 9000 });
         return alreadyExistEmailText;
+    }
+    async createAccount(): Promise<void> {
+        // Implementation for creating account
+        // This method should contain the logic to create an account
+        // using the data that was previously filled in other steps
+        
+        // Generate fake data for account creation
+        const username = faker.person.firstName();
+        const emailAddress = faker.internet.email();
+        const country = "United States";
+        const state = faker.location.state();
+        const city = faker.location.city();
+        const zipCode = faker.location.zipCode();
+        const mobileNumber = faker.phone.number();
+        
+        await this.getUserName(username);
+        await this.getEmailAddress(emailAddress);
+        await this.doSignUp();
+        await this.getUserPassword();
+        await this.getSignUpNewsLetter();
+        await this.getReceiveSpecialOffers();
+        await this.getUserAddressInfo(country, state, city, zipCode, mobileNumber);
+        await this.doSubmitForm();
     }
 }

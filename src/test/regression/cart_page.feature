@@ -43,5 +43,3 @@ Then User validate with expected product quantity "<quantity>"
 Examples:
 | quantity |
 | 4 |
-
-

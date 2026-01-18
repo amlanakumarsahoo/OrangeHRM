@@ -15,6 +15,8 @@ export class CartPage extends BasePage implements CartPageOperations {
     private readonly cartFirstProductTotalPrice: Locator;
     private readonly cartSecondProductTotalPrice: Locator;
     private readonly productAddedToCartConfirmationText: Locator;
+    private readonly proceedToCheckoutBtn: Locator;
+    private readonly registerLoginBtn: Locator;
 
     constructor(page: any) {
         super();
@@ -31,6 +33,8 @@ export class CartPage extends BasePage implements CartPageOperations {
         this.cartFirstProductTotalPrice = page.locator('.cart_total').nth(0);
         this.cartSecondProductTotalPrice = page.locator('.cart_total').nth(1);
         this.productAddedToCartConfirmationText = page.getByText('Product has been added to your cart');
+        this.proceedToCheckoutBtn = page.getByText('Proceed To Checkout');
+        this.registerLoginBtn = page.getByText('Register / Login').nth(1);
     }
 
     //Create instance of CartPage
@@ -103,4 +107,16 @@ export class CartPage extends BasePage implements CartPageOperations {
         const productQuantity = await this.cartFirstProductQuantity.textContent();
         return Number(productQuantity);
     }
+    //Click on Proceed To Checkout button
+    async clickOnProceedToCheckout(): Promise<void> {
+        await this.proceedToCheckoutBtn.click();
+    }
+    //Click on Register / Login button
+    async clickOnRegisterLogin(): Promise<void> {
+        await this.registerLoginBtn.click();
+    }
+    //Do signup and create account
+    // async doSignUpAndCreateAccount(): Promise<void> {
+    //     await this.registerLoginBtn.click();
+    // }
 }

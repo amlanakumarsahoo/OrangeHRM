@@ -8,4 +8,6 @@ export interface CartPageOperations {
     verifyAllProductsAddedToCart(): Promise<boolean>;
     verifyPriceQuantityAndTotalPrice(): Promise<boolean|null>;
     verifyProductQuantityInShoppingCart(quantity: number): Promise<number>;
+    clickOnProceedToCheckout(): Promise<void>;
+    clickOnRegisterLogin(): Promise<void>;
 }

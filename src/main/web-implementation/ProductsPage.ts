@@ -29,8 +29,9 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
     private readonly writeYourReviewReview: Locator;
     private readonly writeYourReviewSubmitBtn: Locator;
     private readonly writeYourReviewThankYou: Locator;
-
-
+    private readonly recommendedItemsHeader: Locator;
+    private readonly recommendedItemsAddToCartBtn: Locator;
+    private readonly viewCartLink: Locator;
 
     constructor(page: any) {
         super();
@@ -61,6 +62,9 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
         this.writeYourReviewReview = page.getByRole('textbox', { name: 'Add Review Here!' })
         this.writeYourReviewSubmitBtn =page.getByRole('button', { name: 'Submit' })
         this.writeYourReviewThankYou = page.getByText('Thank you for your review.')
+        this.recommendedItemsHeader =  page.getByRole('heading', { name: 'recommended items' })
+        this.recommendedItemsAddToCartBtn = page.locator('.recommended_items div div a').first()
+        this.viewCartLink = page.getByRole('link', { name: 'View Cart' })
     }
     //Create instance of ProductsPage
     static async create(page: Page): Promise<ProductsPage> {
@@ -184,5 +188,29 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
             console.log("Review not submitted");
             return false;
         }
+    }
+    //Add recommended items to cart
+    async addRecommendedItemsToCart(): Promise<void> {
+        await this.recommendedItemsAddToCartBtn.click();
+    }
+    //Verify recommended items
+    async verifyRecommendedItems(): Promise<boolean> {
+        try {
+            if (await this.recommendedItemsHeader.isVisible()) {
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.log("Recommended items are not visible");
+            return false;
+        }
+    }
+    //Navigate to cart page
+    async navigateToCartPage(): Promise<void> {
+        await this.recommendedItemsAddToCartBtn.click({ timeout: 5000 });
+    }
+    //Click on view cart link
+    async clickOnViewCartLink(): Promise<void> {
+        await this.viewCartLink.click({ timeout: 5000 });
     }
 }

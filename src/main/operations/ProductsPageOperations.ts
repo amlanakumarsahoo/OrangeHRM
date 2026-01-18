@@ -14,4 +14,8 @@ export interface ProductsPageOperations {
     writeReviewDetails(name: string, email: string, review: string): Promise<void>;
     submitReview(): Promise<void>;
     verifyReviewSubmitted(): Promise<boolean>;
+    addRecommendedItemsToCart(): Promise<void>;
+    verifyRecommendedItems(): Promise<boolean>;
+    navigateToCartPage(): Promise<void>;
+    clickOnViewCartLink(): Promise<void>;
 }

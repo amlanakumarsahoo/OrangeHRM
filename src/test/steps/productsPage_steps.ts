@@ -98,3 +98,30 @@ Then('User submit review', async function () {
 Then('User verifies review submitted', async function () {
     expect(await productsPage.verifyReviewSubmitted()).toBeTruthy();
 });
+
+// Step: Add recommended items to cart
+Then('User add recommended items to cart', async function () {
+    const page = (global as any).page;
+    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    await localProductsPage.addRecommendedItemsToCart();
+});
+
+// Step: Verify recommended items
+Then('User verify "RECOMMENDED ITEMS" is visible', async function () {
+    const page = (global as any).page;
+    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    expect(await localProductsPage.verifyRecommendedItems()).toBeTruthy();
+});
+
+    // Step: Navigate to cart page
+    Then('User navigates to cart page', async function () {
+        await productsPage.navigateToCartPage();
+    });
+
+    // Step: User click on view cart link
+    Then('User click on view cart link', async function () {
+        const page = (global as any).page;
+        const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+        await localProductsPage.clickOnViewCartLink();
+    });
+    

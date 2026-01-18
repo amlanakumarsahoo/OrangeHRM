@@ -62,5 +62,13 @@ Feature: automationexercise application products page functionality
         Examples:
             | Name   | Emailaddress     | Review |
             | Amlana | amlana@gmail.com | Good   |
-            # | Ram    | ram@gmail.com    | Bad    |
+            | Ram    | ram@gmail.com    | Bad    |
 
+    @Add_to_cart_from_Recommended_items_TC005 @Regression @TC022
+    Scenario: Add to cart from Recommended items
+        Given User Visits HomePage
+        When User Observes HomePage Title
+        Then User verify "RECOMMENDED ITEMS" is visible
+        Then User add recommended items to cart
+        Then User click on view cart link
+        # Then User verifies product details

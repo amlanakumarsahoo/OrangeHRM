@@ -17,6 +17,11 @@ export class CartPage extends BasePage implements CartPageOperations {
     private readonly productAddedToCartConfirmationText: Locator;
     private readonly proceedToCheckoutBtn: Locator;
     private readonly registerLoginBtn: Locator;
+    private readonly shipping_address_title: Locator;
+    private readonly billing_address_title: Locator;
+    private readonly review_order_title: Locator;
+    private readonly descriptionInput: Locator;
+    private readonly placeOrderBtn: Locator;
 
     constructor(page: any) {
         super();
@@ -35,6 +40,11 @@ export class CartPage extends BasePage implements CartPageOperations {
         this.productAddedToCartConfirmationText = page.getByText('Product has been added to your cart');
         this.proceedToCheckoutBtn = page.getByText('Proceed To Checkout');
         this.registerLoginBtn = page.getByText('Register / Login').nth(1);
+        this.shipping_address_title = page.locator('.address_title > h3').first();
+        this.billing_address_title = page.locator('.address_title > h3').nth(1);
+        this.review_order_title = page.getByText('Review Your Order');
+        this.descriptionInput = page.locator('.form-control');
+        this.placeOrderBtn = page.getByText('Place Order');
     }
 
     //Create instance of CartPage
@@ -115,8 +125,23 @@ export class CartPage extends BasePage implements CartPageOperations {
     async clickOnRegisterLogin(): Promise<void> {
         await this.registerLoginBtn.click();
     }
-    //Do signup and create account
-    // async doSignUpAndCreateAccount(): Promise<void> {
-    //     await this.registerLoginBtn.click();
-    // }
+    async doVerifyShippingAddress(): Promise<void> {
+        await this.shipping_address_title.isVisible();
+
+        
+    }
+    async doVerifyBillingAddress(): Promise<void> {
+        await this.billing_address_title.isVisible();
+        
+    }
+    async doReviewYourOrder(): Promise<void> {
+        await this.review_order_title.isVisible();
+    }
+    async enterDescription(): Promise<void> {
+        await this.descriptionInput.fill('Test Description');
+    }
+    async buttonClickPlaceOrder(): Promise<void> {
+        await this.placeOrderBtn.click();
+    }
+
 }

@@ -39,6 +39,7 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
     private readonly loginFailedConfirmation: Locator;
     private readonly logoutButton: Locator;
     private readonly alreadyExistEmail: Locator;
+    private readonly loggedInUserText: Locator;
 
     constructor(page: any) {
         super();
@@ -71,12 +72,13 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
         this.loggedInUser = page.locator(".navbar-nav");
         this.deleteAccountButton = page.locator("//a[@href='/delete_account']");
         this.accountDeletedConfirmation = page.locator("[data-qa='account-deleted']");
-        this.loginEmailAddress = page.locator("form").filter({ hasText: 'Login' }).getByPlaceholder('Email Address')
+        this.loginEmailAddress = page.locator("form").filter({ hasText: 'Login' }).getByPlaceholder('Email Address');
         this.loginPassword = page.locator("form").filter({ hasText: 'Login' }).getByPlaceholder('Password')
         this.loginButton = page.locator("form").filter({ hasText: 'Login' }).getByRole('button', { name: 'Login' })
         this.loginFailedConfirmation = page.locator("p:has-text('Your email or password is incorrect')");
         this.logoutButton = page.locator("//a[@href='/logout']");
-        this.alreadyExistEmail = page.getByText('Email Address already exist!')
+        this.alreadyExistEmail = page.getByText('Email Address already exist!');
+        this.loggedInUserText = page.locator('//i[@class="fa fa-user"]');
     }   
 
     [x: string]: any;
@@ -212,11 +214,11 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
     //Get logged in user
     async getLoggedInUser(): Promise<boolean | null> {
         try {
-            const loggedInUserText = await this.page.locator('li:has-text("Logged in as")').textContent({ timeout: 5000 });
-            if (loggedInUserText?.includes('Logged in as')) {
+            if (await this.loggedInUserText.textContent() == 'Logged in as') {
                 return true;
+            }else{
+                return false;
             }
-            return false;
         } catch (error) {
             console.log('Could not find logged in user text:', error);
             return false;
@@ -243,7 +245,7 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
     //Verify logged in user
     async verifyLoggedInUser(): Promise<boolean | null> {
         try {
-            const loggedInUserText = await this.page.locator('li:has-text("Logged in as")').textContent({ timeout: 5000 });
+            const loggedInUserText = await this.loggedInUserText.textContent({ timeout: 5000 });
             if (loggedInUserText?.includes('Logged in as')) {
                 return true;
             }
@@ -292,5 +294,6 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
         await this.getReceiveSpecialOffers();
         await this.getUserAddressInfo(country, state, city, zipCode, mobileNumber);
         await this.doSubmitForm();
+        await this.doContinue();
     }
 }

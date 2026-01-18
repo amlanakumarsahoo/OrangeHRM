@@ -55,9 +55,17 @@ Then('User click on Register Login button', async function () {
     await cartPage.clickOnRegisterLogin();
 });
 
-// Then('User verify Address Details and Review Your Order', async function () {
-//     // await cartPage.verifyShippingAddress();
-//     // await cartPage.verifyBillingAddress();
-//     // await cartPage.verifyReviewYourOrder();
-// });
+Then('User verify address details and review order', async function () {
+    await cartPage.doVerifyShippingAddress();
+    await cartPage.doVerifyBillingAddress();
+    await cartPage.doReviewYourOrder();
+});
+
+Then('User enter description', async function () {
+    await cartPage.enterDescription();
+});
+
+Then('User click on place order button', async function () {
+    await cartPage.buttonClickPlaceOrder();
+});
 

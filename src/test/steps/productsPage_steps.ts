@@ -75,8 +75,15 @@ Then('selected brand products should be displayed {string}', async function (exp
     expect(actualTitle).toContain(expectedTitle);
 });
 
-Then('Verify "string" is visible', async function (productName: string) {
+Then('User verifies {string} is visible', async function (expectedText: string) {
     const page = (global as any).page;
     const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
-    expect(await localProductsPage.verifySearchedProductsPage()).toBe(productName);
+    const actualPageTitle = await localProductsPage.verifySearchedProductsPage();
+    expect(actualPageTitle).toContain(expectedText);
+});
+
+Then('User verifies product details', async function () {
+    const page = (global as any).page;
+    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    expect(await localProductsPage.verifySearchResultsProductDetails()).toBeTruthy();
 });

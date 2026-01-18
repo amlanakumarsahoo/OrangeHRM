@@ -32,6 +32,8 @@ Then('User add second product to cart', async function () {
 });
 
 Then('User navigates to cart page', async function () {
+    const page = (global as any).page;
+    cartPage = await getCartPageApp(page) as CartPageOperations;
     await cartPage.navigateToCartPage();
 });
 

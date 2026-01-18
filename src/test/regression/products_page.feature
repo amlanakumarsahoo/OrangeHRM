@@ -29,10 +29,24 @@ Feature: automationexercise application products page functionality
         When User navigates to Products tab
         Then User should be redirected to All Products page
         Then User search for product "Blue Top"
-        Then Verify 'SEARCHED PRODUCTS' is visible
-        # Then User verifies product details
-        # Then User add product to cart
-        # Then User navigate to cart page
+        Then User verifies "Searched Products" is visible
+        Then User verifies product details
+        Then User click on view product from home page
+        Then User click on Add to cart button
+        Then User click on continue shopping button
+        Then User navigates to cart page
+        Then User validate with expected product quantity "1"
+        Then User Clicks on Signup
+        Then user login with correct email and password
+            | emailaddress     | password   |
+            | amlana@gmail.com | Password@1 |
+        Then User navigates to cart page
+        # Then User validate with expected product quantity "1"
+        Then User remove product from cart
+        Then User validate cart is empty
+        Then User click on click here link
+        Then User Observes HomePage Title
+        Then title should match "Automation Exercise - All Products"
         
     
        

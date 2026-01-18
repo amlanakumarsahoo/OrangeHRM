@@ -4,10 +4,11 @@ export interface ProductsPageOperations {
     verifyProductListCount(): Promise<number>;
     viewFirstProduct(): Promise<void>;
     verifyProductDetails(): Promise<boolean>;
+    verifySearchResultsProductDetails(): Promise<boolean>;
     searchProduct(productName: string): Promise<void>;
     updateQuantity(quantity: number): Promise<number>;
     addToCart(): Promise<void>;
     selectBrandFromProductsPage(brand: string): Promise<void>;
     verifySelectedBrandProducts(): Promise<string>;
     verifySearchedProductsPage(): Promise<string>;
-}   
+}

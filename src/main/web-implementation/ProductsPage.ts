@@ -18,6 +18,13 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
     private readonly productQuantityInput: Locator;
     private readonly addToCartBtn: Locator;
     private readonly productTitle: Locator;
+    //Serach products page
+    private readonly searchProductsPageProductName: Locator;
+    private readonly searchProductsPageProductPrice: Locator;
+    private readonly searchProductsPageAddToCartBtn: Locator;
+    private readonly searchProductsPageViewProductBtn: Locator;
+    
+
 
     constructor(page: any) {
         super();
@@ -38,7 +45,10 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
         this.productQuantityInput = page.locator('#quantity');
         this.addToCartBtn = page.getByRole('button', { name: ' Add to cart' })
         this.productTitle = page.locator('.title.text-center');
-
+        this.searchProductsPageProductPrice = page.getByRole('heading', { name: 'Rs.' }).nth(1)
+        this.searchProductsPageProductName = page.getByText('Blue Top').nth(1)
+        this.searchProductsPageAddToCartBtn = page.getByText('Add to cart').nth(1)
+        this.searchProductsPageViewProductBtn = page.getByRole('link', { name: ' View Product' });
     }
     //Create instance of ProductsPage
     static async create(page: Page): Promise<ProductsPage> {
@@ -58,15 +68,22 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
     async viewFirstProduct(): Promise<void> {
         await this.viewFirstProductBtn.click();
     }
-    //Verify product details
-    async verifyProductDetails(): Promise<boolean> {
+    //Verify search results product details
+    async verifySearchResultsProductDetails(): Promise<boolean> {
+
+        const searchProductsPageProductPrice = await this.searchProductsPageProductPrice.isVisible()
+        const searchProductsPageProductName = await this.searchProductsPageProductName.isVisible()
+        const searchProductsPageAddToCartBtn = await this.searchProductsPageAddToCartBtn.isVisible()
+        const searchProductsPageViewProductBtn = await this.searchProductsPageViewProductBtn.isVisible()
+
         try {
-            if (await this.productName.isVisible() && await this.productCategory.isVisible() && await this.productPrice.isVisible() && await this.productAvailability.isVisible() && await this.productCondition.isVisible() && await this.productBrand.isVisible()) {
-                return true;
-            }
+         if(searchProductsPageProductPrice  && searchProductsPageProductName && searchProductsPageAddToCartBtn && searchProductsPageViewProductBtn === true){
+            return true;
+         }else{
             return false;
+         }
         } catch (error) {
-            console.log("Product details are not visible");
+            console.log("Search results product details are not visible");
             return false;
         }
     }
@@ -116,7 +133,19 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
     }
     //Verify searched products page
     async verifySearchedProductsPage(): Promise<string> {
-        const text = await this.productsPageHeader.textContent();
+        const text = await this.productTitle.textContent();
         return text?.trim() ?? "";
+    }
+    //Verify product details
+    async verifyProductDetails(): Promise<boolean> {
+        try {
+            if (await this.productName.isVisible() && await this.productCategory.isVisible() && await this.productPrice.isVisible() && await this.productAvailability.isVisible() && await this.productCondition.isVisible() && await this.productBrand.isVisible()) {
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.log("Product details are not visible");
+            return false;
+        }
     }
 }

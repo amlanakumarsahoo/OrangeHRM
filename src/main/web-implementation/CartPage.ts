@@ -25,6 +25,18 @@ export class CartPage extends BasePage implements CartPageOperations {
     private readonly removeProductFromCartBtn: Locator;
     private readonly emptyCartHeader: Locator;
     private readonly clickHereLink: Locator;
+    private readonly paymentPageTitle: Locator;
+    private readonly nameOnCard: Locator;
+    private readonly cardNumber: Locator;
+    private readonly cardExpiryDay: Locator;
+    private readonly cardExpiryMonth: Locator;
+    private readonly cardExpiryYear: Locator;
+    private readonly payAndConfirmOrderBtn: Locator;
+    private readonly confirmOrderPageTitle: Locator;
+    private readonly congratulationsMessage: Locator;
+    private readonly downloadInvoiceBtn: Locator;
+    private readonly continueBtn: Locator;
+
     constructor(page: any) {
         super();
         this.page = page;
@@ -50,7 +62,20 @@ export class CartPage extends BasePage implements CartPageOperations {
         this.removeProductFromCartBtn = page.getByRole('cell', { name: '' }).locator('a');
         this.emptyCartHeader = page.getByText('Cart is empty!');
         this.clickHereLink = page.getByRole('link', { name: 'here' })
+
+        this.paymentPageTitle = page.getByRole('heading', { name: 'Payment' });
+        this.nameOnCard = page.locator('input[name="name_on_card"]');
+        this.cardNumber = page.locator('input[name="card_number"]');
+        this.cardExpiryDay = page.getByRole('textbox', { name: 'ex.' });
+        this.cardExpiryMonth = page.getByRole('textbox', { name: 'MM' });
+        this.cardExpiryYear = page.getByRole('textbox', { name: 'YYYY' });
+        this.payAndConfirmOrderBtn = page.getByRole('button', { name: 'Pay and Confirm Order' });
+        this.confirmOrderPageTitle = page.getByText('Order Placed!');
+        this.congratulationsMessage = page.getByText('Congratulations! Your order');
+        this.downloadInvoiceBtn = page.getByRole('link', { name: 'Download Invoice' });
+        this.continueBtn = page.getByRole('link', { name: 'Continue' });
     }
+
 
     //Create instance of CartPage
     static async create(page: Page) {
@@ -157,5 +182,30 @@ export class CartPage extends BasePage implements CartPageOperations {
     async getEmptyCartHeader(): Promise<string | null> {
         return this.emptyCartHeader.textContent();
     }
-
+    async placeOrder(): Promise<void> {
+        await this.placeOrderBtn.click();
+    }
+    async paymentDetails(): Promise<void> {
+        if(await this.paymentPageTitle.isVisible()) {
+        await this.nameOnCard.fill('Test User');
+        await this.cardNumber.fill('1234567890123456');
+        await this.cardExpiryDay.fill('01');
+        await this.cardExpiryMonth.fill('01');
+        await this.cardExpiryYear.fill('2025');
+        await this.payAndConfirmOrderBtn.click();
+        }
+    }
+    async getOrderConfirmation(): Promise<string | null> {
+        return this.confirmOrderPageTitle.textContent();
+        }
+    
+    async getCongratulationsMessage(): Promise<string | null> {
+        return this.congratulationsMessage.textContent();
+    }
+    async doDownloadInvoice(): Promise<void> {    
+        await this.downloadInvoiceBtn.isVisible();
+        await this.continueBtn.isVisible();
+        await this.downloadInvoiceBtn.click();
+        await this.continueBtn.click();
+    }       
 }

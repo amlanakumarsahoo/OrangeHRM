@@ -18,4 +18,10 @@ export interface CartPageOperations {
     removeProductFromCart(): Promise<void>;
     clickHereLinkRedirectHomePage(): Promise<void>;
     getEmptyCartHeader(): Promise<string | null>;
+    placeOrder(): Promise<void>;
+    paymentDetails(): Promise<void>;
+    doDownloadInvoice(): Promise<void>;
+    getOrderConfirmation(): Promise<string | null>;
+    getCongratulationsMessage(): Promise<string | null>;
+
 }

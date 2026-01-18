@@ -51,6 +51,41 @@ Feature: automationexercise application Place Order functionality
         Then user should able to delete the account
         Then user verify the account deleted confirmation
         Then user clicks on continue button
+
+    @DownloadInvoiceAfterPurchaseOrder_TC003 @Regression @TC024
+    Scenario:Download Invoice after purchase order
+    Given User Visits HomePage
+        When User Observes HomePage Title   
+        Then title should match "Automation Exercise"
+        Then User click on view product from home page
+        Then User verifies product name, category, price, availability, condition, brand
+        Then User click on Add to cart button
+        Then User click on continue shopping button
+        Then user should be able to click on signup button
+        Then user should be able to verify creation of new user
+        Then user fill the user password information
+        Then user fill the user DOB information
+        Then user fill the user news letter information
+        Then user fill the user special offers information
+        Then user fill the user address information
+            | country       | state    | city     | zipCode | mobileNumber |
+            | United States | New York | New York | 10001   | 1234567890   |
+        Then user should be able to submit the signup form
+        Then user should be able to verify account created confirmation
+        Then user clicks on continue button
+        Then user should be able to verify loggedin user
+        Then User navigates to cart page
+        Then User click on Proceed To Checkout button
+        Then User verify address details and review order
+        Then User enter description
+        Then User clicks on place order button
+        Then User Enter payment details
+        Then User Confirm order
+        Then User verify congatulations message
+        Then User Download Invoice & verify invoice downloaded
+        Then user should able to delete the account
+        Then user verify the account deleted confirmation
+        Then user clicks on continue button
   
 
 

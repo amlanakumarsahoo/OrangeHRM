@@ -83,6 +83,21 @@ Then('User click on click here link', async function () {
     await cartPage.clickHereLinkRedirectHomePage();
 });
 
+Then('User clicks on place order button', async function () {
+    await cartPage.placeOrder();
+});
+Then('User Enter payment details', async function () {
+    await cartPage.paymentDetails();
+});
+Then('User Confirm order', async function () {
+    await cartPage.getOrderConfirmation();
+});
+Then('User verify congatulations message', async function () {
+    await cartPage.getCongratulationsMessage();
+});
+Then('User Download Invoice & verify invoice downloaded', async function () {
+    await cartPage.doDownloadInvoice();
+});
 
 
 

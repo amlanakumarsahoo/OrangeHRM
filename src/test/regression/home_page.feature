@@ -22,5 +22,12 @@ Given User Visits HomePage
 When User Observes HomePage Title
 Then title should match "Automation Exercise"
 Then Subscription should be visible
-Then User clicks on Scroll Up button
-# Then User should be able to verify Scroll Up button
+Then User clicks on Scroll Up button with Arrow button
+
+@ScrollUpHomePage_TC004 @Regression @TC026
+Scenario:Verify Scroll Up without 'Arrow' button and Scroll Down functionality
+Given User Visits HomePage
+When User Observes HomePage Title
+Then title should match "Automation Exercise"
+Then Subscription should be visible
+Then User clicks on Scroll Up button without Arrow button

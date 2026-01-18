@@ -50,6 +50,10 @@ Then('User click on view product from home page', async function() {
     productsPage = await getProductsPageApp(page) as ProductsPageOperations;
 });
 
-Then('User clicks on Scroll Up button', async function () {
+Then('User clicks on Scroll Up button with Arrow button', async function () {
     await homePage.clickOnScrollUpButton();
+});
+
+Then('User clicks on Scroll Up button without Arrow button', async function () {
+    await homePage.clickOnScrollUpButtonWithoutArrow();
 });

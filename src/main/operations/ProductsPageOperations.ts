@@ -11,4 +11,7 @@ export interface ProductsPageOperations {
     selectBrandFromProductsPage(brand: string): Promise<void>;
     verifySelectedBrandProducts(): Promise<string>;
     verifySearchedProductsPage(): Promise<string>;
+    writeReviewDetails(name: string, email: string, review: string): Promise<void>;
+    submitReview(): Promise<void>;
+    verifyReviewSubmitted(): Promise<boolean>;
 }

@@ -23,7 +23,13 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
     private readonly searchProductsPageProductPrice: Locator;
     private readonly searchProductsPageAddToCartBtn: Locator;
     private readonly searchProductsPageViewProductBtn: Locator;
-    
+    private readonly writeYourReviewHeader: Locator;
+    private readonly writeYourReviewName: Locator;
+    private readonly writeYourReviewEmail: Locator;
+    private readonly writeYourReviewReview: Locator;
+    private readonly writeYourReviewSubmitBtn: Locator;
+    private readonly writeYourReviewThankYou: Locator;
+
 
 
     constructor(page: any) {
@@ -49,6 +55,12 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
         this.searchProductsPageProductName = page.getByText('Blue Top').nth(1)
         this.searchProductsPageAddToCartBtn = page.getByText('Add to cart').nth(1)
         this.searchProductsPageViewProductBtn = page.getByRole('link', { name: ' View Product' });
+        this.writeYourReviewHeader = page.getByRole('link', { name: 'Write Your Review' })
+        this.writeYourReviewName = page.getByRole('textbox', { name: 'Your Name' })
+        this.writeYourReviewEmail = page.getByRole('textbox', { name: 'Email Address', exact: true })
+        this.writeYourReviewReview = page.getByRole('textbox', { name: 'Add Review Here!' })
+        this.writeYourReviewSubmitBtn =page.getByRole('button', { name: 'Submit' })
+        this.writeYourReviewThankYou = page.getByText('Thank you for your review.')
     }
     //Create instance of ProductsPage
     static async create(page: Page): Promise<ProductsPage> {
@@ -77,11 +89,11 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
         const searchProductsPageViewProductBtn = await this.searchProductsPageViewProductBtn.isVisible()
 
         try {
-         if(searchProductsPageProductPrice  && searchProductsPageProductName && searchProductsPageAddToCartBtn && searchProductsPageViewProductBtn === true){
-            return true;
-         }else{
-            return false;
-         }
+            if (searchProductsPageProductPrice && searchProductsPageProductName && searchProductsPageAddToCartBtn && searchProductsPageViewProductBtn === true) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (error) {
             console.log("Search results product details are not visible");
             return false;
@@ -110,7 +122,7 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
             brandName = brandName.trim();
             const brand = `//a[@href='/brand_products/${brandName}']`;
             const brandElement = this.page.locator(brand);
-            
+
             // Wait for the brand element to be visible
             await brandElement.waitFor({ state: 'visible', timeout: 10000 });
             await brandElement.click({ timeout: 5000 });
@@ -145,6 +157,31 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
             return false;
         } catch (error) {
             console.log("Product details are not visible");
+            return false;
+        }
+    }
+    //Write review details
+    async writeReviewDetails(name: string, email: string, review: string): Promise<void> {
+        
+        if(await this.writeYourReviewHeader.isVisible()){
+        await this.writeYourReviewName.fill(name);
+        await this.writeYourReviewEmail.fill(email);
+        await this.writeYourReviewReview.fill(review);
+    }
+    }
+    //Submit review
+    async submitReview(): Promise<void> {
+        await this.writeYourReviewSubmitBtn.click();
+    }
+    //Verify review submitted
+    async verifyReviewSubmitted(): Promise<boolean> {
+        try {
+            if (await this.writeYourReviewThankYou.isVisible()) {
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.log("Review not submitted");
             return false;
         }
     }

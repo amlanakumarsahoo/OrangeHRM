@@ -10,7 +10,7 @@ Feature: automationexercise application products page functionality
         Then User clicks on first product
         Then User landed to product detail page
         Then User verifies product name, category, price, availability, condition, brand
-    
+
     @SearchProducts_TC002 @Regression
     Scenario: Verify Search Products functionality
         Given User Visits HomePage
@@ -47,6 +47,20 @@ Feature: automationexercise application products page functionality
         Then User click on click here link
         Then User Observes HomePage Title
         Then title should match "Automation Exercise - All Products"
-        
-    
-       
+
+
+    @AddReviewOnProduct_TC004 @Regression @TC021
+    Scenario Outline:Add review on product
+        Given User Visits HomePage
+        When User Observes HomePage Title
+        When User navigates to Products tab
+        Then User should be redirected to All Products page
+        Then User click on view product from home page
+        Then User write review details
+        Then User submit review
+        Then User verifies review submitted
+        Examples:
+            | Name   | Emailaddress     | Review |
+            | Amlana | amlana@gmail.com | Good   |
+            # | Ram    | ram@gmail.com    | Bad    |
+

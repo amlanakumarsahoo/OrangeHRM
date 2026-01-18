@@ -102,6 +102,10 @@ export class HomePage extends BasePage implements HomePageOperations {
     async clickOnViewProduct(): Promise<void> {
         await this.viewProductSelector.click();
     }
+    //Click on arrow at bottom right side to move upward
+    async clickOnScrollUpButton(): Promise<void> {
+        await this.page.keyboard.press('ArrowUp');
+    }
 }
 
 

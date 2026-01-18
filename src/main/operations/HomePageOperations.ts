@@ -8,5 +8,6 @@ export interface HomePageOperations  extends AutoExeAppOperations{
     enterEmailIdAndClickSubscribeButton(): Promise<void>;
     getSubscriptionMessage(): Promise<string|null>;
     clickOnViewProduct(): Promise<void>;
+    clickOnScrollUpButton(): Promise<void>;
 }
 

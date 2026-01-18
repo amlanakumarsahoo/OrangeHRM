@@ -16,3 +16,11 @@ Then Subscription should be visible
 Then User enters email id and clicks on subscribe button
 Then User should be able to verify subscription message "You have been successfully subscribed!"
 
+@ScrollUpHomePage_TC003 @Regression @TC025
+Scenario:Verify Scroll Up using 'Arrow' button and Scroll Down
+Given User Visits HomePage
+When User Observes HomePage Title
+Then title should match "Automation Exercise"
+Then Subscription should be visible
+Then User clicks on Scroll Up button
+# Then User should be able to verify Scroll Up button

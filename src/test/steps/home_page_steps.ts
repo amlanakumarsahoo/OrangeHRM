@@ -49,3 +49,7 @@ Then('User click on view product from home page', async function() {
     const page = (global as any).page;
     productsPage = await getProductsPageApp(page) as ProductsPageOperations;
 });
+
+Then('User clicks on Scroll Up button', async function () {
+    await homePage.clickOnScrollUpButton();
+});

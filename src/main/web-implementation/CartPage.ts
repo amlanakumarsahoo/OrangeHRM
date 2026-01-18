@@ -22,7 +22,9 @@ export class CartPage extends BasePage implements CartPageOperations {
     private readonly review_order_title: Locator;
     private readonly descriptionInput: Locator;
     private readonly placeOrderBtn: Locator;
-
+    private readonly removeProductFromCartBtn: Locator;
+    private readonly emptyCartHeader: Locator;
+    private readonly clickHereLink: Locator;
     constructor(page: any) {
         super();
         this.page = page;
@@ -45,6 +47,9 @@ export class CartPage extends BasePage implements CartPageOperations {
         this.review_order_title = page.getByText('Review Your Order');
         this.descriptionInput = page.locator('.form-control');
         this.placeOrderBtn = page.getByText('Place Order');
+        this.removeProductFromCartBtn = page.getByRole('cell', { name: '' }).locator('a');
+        this.emptyCartHeader = page.getByText('Cart is empty!');
+        this.clickHereLink = page.getByRole('link', { name: 'here' })
     }
 
     //Create instance of CartPage
@@ -142,6 +147,15 @@ export class CartPage extends BasePage implements CartPageOperations {
     }
     async buttonClickPlaceOrder(): Promise<void> {
         await this.placeOrderBtn.click();
+    }
+    async removeProductFromCart(): Promise<void> {
+        await this.removeProductFromCartBtn.click();
+    }
+    async clickHereLinkRedirectHomePage(): Promise<void> {
+        await this.clickHereLink.click();
+    }
+    async getEmptyCartHeader(): Promise<string | null> {
+        return this.emptyCartHeader.textContent();
     }
 
 }

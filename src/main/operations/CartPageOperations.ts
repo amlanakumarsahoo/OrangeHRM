@@ -15,4 +15,7 @@ export interface CartPageOperations {
     doReviewYourOrder(): Promise<void>;
     enterDescription(): Promise<void>;
     buttonClickPlaceOrder(): Promise<void>;
+    removeProductFromCart(): Promise<void>;
+    clickHereLinkRedirectHomePage(): Promise<void>;
+    getEmptyCartHeader(): Promise<string | null>;
 }

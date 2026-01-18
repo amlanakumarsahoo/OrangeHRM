@@ -43,3 +43,20 @@ Then User validate with expected product quantity "<quantity>"
 Examples:
 | quantity |
 | 4 |
+
+@Remove_Products_From_Cart_TC004 @Regression @TC018
+Scenario: Remove Products From Cart
+Given User Visits HomePage
+When User Observes HomePage Title
+Then title should match "Automation Exercise"
+Then User click on view product from home page 
+Then User verifies product name, category, price, availability, condition, brand 
+Then User click on Add to cart button 
+Then User click on continue shopping button
+Then User navigates to cart page 
+Then User validate with expected product quantity "1"
+Then User remove product from cart
+Then User validate cart is empty
+Then User click on click here link
+Then User Observes HomePage Title
+Then title should match "Automation Exercise"

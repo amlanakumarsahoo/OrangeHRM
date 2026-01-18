@@ -69,3 +69,16 @@ Then('User click on place order button', async function () {
     await cartPage.buttonClickPlaceOrder();
 });
 
+Then('User remove product from cart', async function () {
+    await cartPage.removeProductFromCart();
+});
+
+Then('User validate cart is empty', async function () {
+    expect(await cartPage.getEmptyCartHeader()).toBeTruthy();
+});
+
+Then('User click on click here link', async function () {
+    await cartPage.clickHereLinkRedirectHomePage();
+});
+
+

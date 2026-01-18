@@ -78,10 +78,8 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
         this.loginFailedConfirmation = page.locator("p:has-text('Your email or password is incorrect')");
         this.logoutButton = page.locator("//a[@href='/logout']");
         this.alreadyExistEmail = page.getByText('Email Address already exist!');
-        this.loggedInUserText = page.locator('//i[@class="fa fa-user"]');
+        this.loggedInUserText = page.locator('//i[@class="fa fa-user"]/parent::a');
     }   
-
-    [x: string]: any;
     //Get user password
     async getUserPassword(): Promise<void> {
         await this.password.fill(faker.person.firstName()+"@123");
@@ -93,6 +91,14 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
     //Get email address
     async getEmailAddress(emailAddress: string): Promise<void> {
         await this.emailAddress.fill(emailAddress)
+    }
+    //Get fresh user name
+    async getFreshUserName(username: string): Promise<void> {
+        await this.userName.fill(username);
+    }
+    //Get fresh email address
+    async getFreshEmailAddress(emailAddress: string): Promise<void> {
+        await this.emailAddress.fill(emailAddress);
     }
     //Click on sign up button
     async doSignUp(): Promise<void> {
@@ -212,21 +218,13 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
         await this.continueButton.click({ timeout: 9000 }); 
     }
     //Get logged in user
-    async getLoggedInUser(): Promise<boolean | null> {
-        try {
-            if (await this.loggedInUserText.textContent() == 'Logged in as') {
-                return true;
-            }else{
-                return false;
-            }
-        } catch (error) {
-            console.log('Could not find logged in user text:', error);
-            return false;
-        }
+    async getLoggedInUser(): Promise<string | null> {
+        const loggedInUserName = await this.loggedInUserText.textContent({ timeout: 5000 });
+        return loggedInUserName;
     }
     // Delete Account
     async deleteAccount(): Promise<void> {
-        await this.deleteAccountButton.click({ timeout: 5000 }); 
+        await this.deleteAccountButton.click({ timeout: 9000 }); 
     }  
     //Get account deleted confirmation
     async getAccountDeletedConfirmation(): Promise<boolean | null> {
@@ -296,4 +294,5 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
         await this.doSubmitForm();
         await this.doContinue();
     }
+    
 }

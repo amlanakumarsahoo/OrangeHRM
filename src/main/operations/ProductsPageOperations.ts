@@ -7,4 +7,7 @@ export interface ProductsPageOperations {
     searchProduct(productName: string): Promise<void>;
     updateQuantity(quantity: number): Promise<number>;
     addToCart(): Promise<void>;
+    selectBrandFromProductsPage(brand: string): Promise<void>;
+    verifySelectedBrandProducts(): Promise<string>;
+    verifySearchedProductsPage(): Promise<string>;
 }   

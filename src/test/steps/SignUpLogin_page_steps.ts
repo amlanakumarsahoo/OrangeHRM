@@ -21,8 +21,18 @@ Then('user should be able to enter the username {string}', async function (usern
     await signUpLoginPage.getUserName(username);
 });
 
+Then('user should be able to enter the fresh user', async function () {
+    const username = faker.person.firstName();
+    await signUpLoginPage.getFreshUserName(username);
+});
+
 Then('user should be able to enter the email address {string}', async function (emailaddress: string) {
     await signUpLoginPage.getEmailAddress(emailaddress);
+});
+
+Then('user should be able to enter the fresh email address', async function () {
+    const emailaddress = faker.internet.email();
+    await signUpLoginPage.getFreshEmailAddress(emailaddress);
 });
 
 Then('user should be able to click on signup button', async function () {
@@ -33,9 +43,9 @@ Then('user should be able to verify creation of new user', async function () {
     const newCreatedUser = await signUpLoginPage.verifyCreationOfNewUser();
     expect(newCreatedUser).toBeTruthy();
 });
-Then('user fill the user information', async function () {
-    await signUpLoginPage.fillUserInfo();
-});
+// Then('user fill the user information', async function () {
+//     await signUpLoginPage.fillUserInfo();
+// });
 Then('user fill the user password information', async function () {
     await signUpLoginPage.getUserPassword();
 });
@@ -69,8 +79,7 @@ Then('user clicks on continue button', async function () {
     await signUpLoginPage.doContinue();
 });
 Then('user should be able to verify loggedin user', async function () {
-    const loggedInUser = await signUpLoginPage.getLoggedInUser();
-    expect(loggedInUser).toBeTruthy();
+    expect(await signUpLoginPage.getLoggedInUser()).toContain('Logged in as');
 });
 Then('user should able to delete the account', async function () {
     await signUpLoginPage.deleteAccount();

@@ -119,7 +119,7 @@ After(async function (scenario) {
                 path: screenshotPath,
                 fullPage: true 
             });
-            console.log(`📷 Screenshot captured for passed scenario: ${screenshotPath}`);
+            //console.log(`📷 Screenshot captured for passed scenario: ${screenshotPath}`);
         }
         
         // Close browser context and browser (this will save the video)

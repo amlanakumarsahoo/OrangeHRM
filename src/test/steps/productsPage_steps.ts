@@ -7,38 +7,51 @@ import { productsPage } from './home_page_steps';
 let page = (global as any).page;
 // Step: Navigate to Products tab
 When('User navigates to Products tab', async function () {
+    page = (global as any).page;
     const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
     await localProductsPage.navigateToProductsPage();
 });
 
 // Step: Verify redirect to All Products page
 Then('User should be redirected to All Products page', async function () {
-    expect(await productsPage.verifyAllProductsPage()).toBe('All Products');
+    const page = (global as any).page;
+    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    expect(await localProductsPage.verifyAllProductsPage()).toBe('All Products');
 });
 
 // Step: Verify product list is not empty
 Then('User verifies product list', async function () {
-    expect(await productsPage.verifyProductListCount()).toBeGreaterThan(0);
+    const page = (global as any).page;
+    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    expect(await localProductsPage.verifyProductListCount()).toBeGreaterThan(0);
 });
 
 // Step: Click on first product
 Then('User clicks on first product', async function () {
-    await productsPage.viewFirstProduct();
+    const page = (global as any).page;
+    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    await localProductsPage.viewFirstProduct();
 });
 
 // Step: Verify product details page
 Then('User landed to product detail page', async function () {
-    expect(await productsPage.verifyProductDetails()).toBeTruthy();
+    const page = (global as any).page;
+    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    expect(await localProductsPage.verifyProductDetails()).toBeTruthy();
 });
 
 // Step: Verify product attributes
 Then('User verifies product name, category, price, availability, condition, brand', async function () {
-    expect(await productsPage.verifyProductDetails()).toBeTruthy();
+    const page = (global as any).page;
+    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    expect(await localProductsPage.verifyProductDetails()).toBeTruthy();
 });
 
 // Step: Search for product
 Then('User search for product {string}', async function (productName: string) {
-    await productsPage.searchProduct(productName);
+    const page = (global as any).page;
+    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    await localProductsPage.searchProduct(productName);
 });
 
 // Step: Increase product quantity
@@ -53,3 +66,17 @@ Then('User click on Add to cart button', async function () {
     await productsPage.addToCart();
 });
 
+Then('User select brand from products page {string}', async function (brand: string) {
+    await productsPage.selectBrandFromProductsPage(brand);
+});
+
+Then('selected brand products should be displayed {string}', async function (expectedTitle: string) {
+    const actualTitle = await productsPage.verifySelectedBrandProducts();
+    expect(actualTitle).toContain(expectedTitle);
+});
+
+Then('Verify "string" is visible', async function (productName: string) {
+    const page = (global as any).page;
+    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    expect(await localProductsPage.verifySearchedProductsPage()).toBe(productName);
+});

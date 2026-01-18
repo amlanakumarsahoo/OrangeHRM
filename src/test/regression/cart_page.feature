@@ -25,5 +25,23 @@ Then User click on continue shopping button
 Then User add second product to cart
 Then User click on continue shopping button
 Then User navigates to cart page 
-# Then Verify all products added to cart
 Then User verify price quantity and total price
+
+@VerifyProductQuantityInCart_TC003 @Regression
+Scenario Outline:Verify Product quantity in Cart
+Given User Visits HomePage
+When User Observes HomePage Title
+Then title should match "Automation Exercise"
+Then User click on view product from home page 
+Then User verifies product name, category, price, availability, condition, brand 
+# Then User increse the quantity
+# Then User click on Add to cart button 
+# Then User click on continue shopping button
+# Then User navigates to cart page 
+# Then User validate with expected product quantity
+
+Examples:
+| quantity |
+| 4 |
+
+

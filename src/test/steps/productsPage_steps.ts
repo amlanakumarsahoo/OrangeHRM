@@ -2,14 +2,13 @@ import { Given, When, Then } from '@cucumber/cucumber';
 import { expect, Page } from '@playwright/test';
 import { ProductsPageOperations } from '../../main/operations/ProductsPageOperations';
 import { getProductsPageApp } from '../../main/utilities/autoExe-utils';
+import { productsPage } from './home_page_steps';
 
-export let productsPage: ProductsPageOperations;
-
+let page = (global as any).page;
 // Step: Navigate to Products tab
 When('User navigates to Products tab', async function () {
-    const page = (global as any).page;
-    productsPage = await getProductsPageApp(page) as ProductsPageOperations;
-    await productsPage.navigateToProductsPage();
+    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    await localProductsPage.navigateToProductsPage();
 });
 
 // Step: Verify redirect to All Products page

@@ -12,6 +12,7 @@ export class HomePage extends BasePage implements HomePageOperations {
     private readonly emailIdSelector: Locator;
     private readonly subscribeButtonSelector: Locator;
     private readonly subscriptionMessageSelector: Locator;
+    private readonly viewProductSelector: Locator;
     constructor(page: any) {
         super();
         // Add null/undefined check for page parameter
@@ -28,6 +29,7 @@ export class HomePage extends BasePage implements HomePageOperations {
         this.emailIdSelector = page.getByRole('textbox', { name: 'Your email address' })
         this.subscribeButtonSelector = page.getByRole('button', { name: '' });
         this.subscriptionMessageSelector = page.getByText('You have been successfully')
+        this.viewProductSelector = page.getByRole('link', { name: ' View Product' }).first();
     }
     doSignup(): Promise<void | null> {
         this.signupSelector.click();
@@ -90,6 +92,9 @@ export class HomePage extends BasePage implements HomePageOperations {
     }
     async getSubscriptionMessage(): Promise<string | null> {
         return this.subscriptionMessageSelector.textContent();
+    }
+    async clickOnViewProduct(): Promise<void> {
+        await this.viewProductSelector.click();
     }
 }
 

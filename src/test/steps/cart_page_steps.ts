@@ -40,3 +40,5 @@ Then('Verify all products added to cart', async function () {
 Then('User verify price quantity and total price', async function () {
     expect(await cartPage.verifyPriceQuantityAndTotalPrice()).toBeTruthy();
 });
+
+

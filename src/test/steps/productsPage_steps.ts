@@ -3,6 +3,7 @@ import { expect, Page } from '@playwright/test';
 import { ProductsPageOperations } from '../../main/operations/ProductsPageOperations';
 import { getProductsPageApp } from '../../main/utilities/autoExe-utils';
 import { productsPage } from './home_page_steps';
+import { verify } from 'crypto';
 
 let page = (global as any).page;
 // Step: Navigate to Products tab
@@ -118,5 +119,43 @@ Then('User verify "RECOMMENDED ITEMS" is visible', async function () {
         const page = (global as any).page;
         const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
         await localProductsPage.clickOnViewCartLink();
+    });
+    
+    Then('User verify "Category" is visible', async function () {
+        const page = (global as any).page;
+        const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+        expect(await localProductsPage.verifyCategoryHeader()).toContain('Category');
+    });
+    Then('User click on women category', async function () {
+        const page = (global as any).page;
+        const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+        await localProductsPage.selectWomenCategory();
+    });
+    Then('User click on dress subcategory', async function () {
+        const page = (global as any).page;
+        const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+        await localProductsPage.selectDressSubcategory();
+    });
+    Then('User click on men category', async function () {
+        const page = (global as any).page;
+        const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+        await localProductsPage.selectMenCategory();
+    });
+    Then('User click on tshirts subcategory', async function () {
+        const page = (global as any).page;
+        const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+        await localProductsPage.selectTshirtsSubcategory();
+    });
+    
+    Then('verify women dress subcategory products are visible', async function () {
+        const page = (global as any).page;
+        const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+        expect(await localProductsPage.verifyWomenDressSubCategoryProductsAreVisible()).toBeTruthy();
+    });
+    
+    Then('verify men tshirts subcategory products are visible', async function () {
+        const page = (global as any).page;
+        const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+        expect(await localProductsPage.verifyMenTshirtsSubCategoryProductsAreVisible()).toBeTruthy();
     });
     

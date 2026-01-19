@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
 import { ProductsPageOperations } from "../operations/ProductsPageOperations";
 import { BasePage } from "./BasePage";
 
@@ -32,7 +32,15 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
     private readonly recommendedItemsHeader: Locator;
     private readonly recommendedItemsAddToCartBtn: Locator;
     private readonly viewCartLink: Locator;
-
+    private readonly categoryHeader: Locator;
+    private readonly womenCategory: Locator;
+    private readonly dressCategory: Locator;
+    private readonly menCategory: Locator;
+    private readonly tshirtsCategory: Locator;
+    private readonly womenDressSubCategoryHeader: Locator;
+    private readonly menTshirtsSubCategoryHeader: Locator;
+    
+    
     constructor(page: any) {
         super();
         this.page = page;
@@ -65,6 +73,13 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
         this.recommendedItemsHeader =  page.getByRole('heading', { name: 'recommended items' })
         this.recommendedItemsAddToCartBtn = page.locator('.recommended_items div div a').first()
         this.viewCartLink = page.getByRole('link', { name: 'View Cart' })
+        this.categoryHeader = page.getByRole('heading', { name: 'Category' })
+        this.womenCategory = page.getByRole('link', { name: ' Women' })
+        this.dressCategory = page.getByRole('link', { name: 'Dress' })
+        this.womenDressSubCategoryHeader = page.getByRole('heading', { name: 'Women - Dress Products' })
+        this.menCategory = page.getByRole('link', { name: ' Men' })
+        this.tshirtsCategory = page.getByRole('link', { name: 'Tshirts' })
+        this.menTshirtsSubCategoryHeader = page.getByRole('heading', { name: 'Men - Tshirts Products' })
     }
     //Create instance of ProductsPage
     static async create(page: Page): Promise<ProductsPage> {
@@ -212,5 +227,70 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
     //Click on view cart link
     async clickOnViewCartLink(): Promise<void> {
         await this.viewCartLink.click({ timeout: 5000 });
+    }
+
+    //Select brand category
+    // async selectBrandCategory(): Promise<void> {
+    //     //select category header
+    //     await expect(this.categoryHeader).toBeVisible();
+    //     //select women category
+    //     await this.womenCategory.click();
+    //     //select dress
+    //     await this.dressCategory.click();
+    //     //select women - dress products header
+    //    // await expect(this.womenDressProductsHeader).toBeVisible();
+
+    //     //select men category
+    //     await this.menCategory.click();
+    //     //select tshirts
+    //     await this.tshirtsCategory.click();
+    //     //select men - tshirts products header
+    //    // await expect(this.menTshirtsProductsHeader).toBeVisible();
+    // }
+
+    //Select category
+    async verifyCategoryHeader(): Promise<string> {
+        const text = await this.categoryHeader.textContent();
+        return text?.trim() ?? "";
+    }
+    //Select women category
+    async selectWomenCategory(): Promise<void> {
+        await this.womenCategory.click({ timeout: 5000 });
+    }
+    //Select dress subcategory
+    async selectDressSubcategory(): Promise<void> {
+        await this.dressCategory.click({ timeout: 5000 });
+    }
+    //Select men category
+    async selectMenCategory(): Promise<void> {
+        await this.menCategory.click({ timeout: 5000 });
+    }
+    //Select tshirts subcategory
+    async selectTshirtsSubcategory(): Promise<void> {
+        await this.tshirtsCategory.click({ timeout: 5000 });
+    }
+    //Verify category products are visible -womenDressSubCategoryHeader
+    async verifyWomenDressSubCategoryProductsAreVisible(): Promise<boolean> {
+        try {
+            if (await this.womenDressSubCategoryHeader.isVisible()) {
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.log("Women Dress Sub Category products are not visible");
+            return false;
+        }
+    }
+    //Verify category products are visible -menTshirtsSubCategoryHeader
+    async verifyMenTshirtsSubCategoryProductsAreVisible(): Promise<boolean> {
+        try {
+            if (await this.menTshirtsSubCategoryHeader.isVisible()) {
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.log("Men Tshirts Sub Category products are not visible");
+            return false;
+        }
     }
 }

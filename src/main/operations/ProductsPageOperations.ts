@@ -18,4 +18,11 @@ export interface ProductsPageOperations {
     verifyRecommendedItems(): Promise<boolean>;
     navigateToCartPage(): Promise<void>;
     clickOnViewCartLink(): Promise<void>;
+    verifyCategoryHeader(): Promise<string>;
+    selectWomenCategory(): Promise<void>;
+    selectDressSubcategory(): Promise<void>;
+    selectMenCategory(): Promise<void>;
+    selectTshirtsSubcategory(): Promise<void>;
+    verifyWomenDressSubCategoryProductsAreVisible(): Promise<boolean>;
+    verifyMenTshirtsSubCategoryProductsAreVisible(): Promise<boolean>;
 }

@@ -72,3 +72,17 @@ Feature: automationexercise application products page functionality
         Then User add recommended items to cart
         Then User click on view cart link
         # Then User verifies product details
+
+    @View_Category_Products_TC006 @Regression @TC018
+    Scenario: View Category Products
+        Given User Visits HomePage
+        When User Observes HomePage Title
+        Then User verify "Category" is visible
+        Then User click on women category
+        Then User click on dress subcategory
+        Then verify women dress subcategory products are visible
+        Then User click on men category
+        Then User click on tshirts subcategory
+        Then verify men tshirts subcategory products are visible
+
+       
